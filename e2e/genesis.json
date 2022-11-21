@@ -1,0 +1,43 @@
+{
+    "name": "polygon-edge",
+    "genesis": {
+        "nonce": "0x0000000000000000",
+        "timestamp": "0x0",
+        "extraData": "0x0000000000000000000000000000000000000000000000000000000000000000f90127f90120f846941e86ba4585d122bf5a2975268bff65e3b380fbfbb0af109913c35fdd0aab77e6e102cd61d75ed50d421b65d721c6cf491c7703d2028f30af283b65ec2a97e75529b09b788bf846945ed001dc88dada2cc885a15457bf515dd818469fb0a77c4d44dd300d9ab5f6e79762dd73d00c9931efccb3103780bfce5615e95fe5d73040add4aa50184eba60d5b2b374b4f84694fd44edaf0f6dcd6669087ef3e95ebd752e8a086ab0892085e71629f05e9e59c90c67128ef1fb9b5d0db498441a01739fb4e1896d928df90c17dc8a7d0dc90f7d245b747bbaf846946e209ca0c916c3a7cf10e63fb9993e35aeb3973ab0b577aea954109139b98af5706c0a346fed8031e96791592841cc9eee7bf43cae02405df509ad925ed209e039746d6b9580c28080",
+        "gasLimit": "0x500000",
+        "difficulty": "0x1",
+        "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "coinbase": "0x0000000000000000000000000000000000000000",
+        "alloc": {
+            "b507bae31ba521ad00a718d228045aba2d8832e6": { "balance": "90000000000000000000000000000000" }
+        },
+        "number": "0x0",
+        "gasUsed": "0x70000",
+        "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "params": {
+        "forks": {
+            "homestead": 0,
+            "byzantium": 0,
+            "constantinople": 0,
+            "petersburg": 0,
+            "istanbul": 0,
+            "EIP150": 0,
+            "EIP158": 0,
+            "EIP155": 0
+        },
+        "chainID": 100,
+        "engine": {
+            "ibft": {
+                "epochSize": 100000,
+                "type": "PoA",
+                "validator_type": "bls"
+            }
+        },
+        "blockGasTarget": 0
+    },
+    "bootnodes": [
+        "/dns4/polygon-bootnode-1/tcp/10001/p2p/16Uiu2HAkvjovMdPsGnDhFdXALvDyXw75zgSmiRoaVa61tGDwrhob",
+        "/dns4/polygon-bootnode-2/tcp/10001/p2p/16Uiu2HAkzpi3bK6kCjKTbsPzYQQJxDJHKyYfG7uZeu1sfne3us7Z"
+    ]
+}

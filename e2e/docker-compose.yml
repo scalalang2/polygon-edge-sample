@@ -1,0 +1,55 @@
+services:
+  polygon-bootnode-1:
+    hostname: polygon-bootnode-1
+    image: polygon
+    build:
+      context: ..
+    command:
+      server
+      --data-dir /data/test-chain-1 
+      --chain /data/genesis.json 
+      --grpc-address :10000 
+      --libp2p 0.0.0.0:10001 
+      --jsonrpc :10002 
+      --seal
+  polygon-bootnode-2:
+    hostname: polygon-bootnode-2
+    image: polygon
+    command:
+      server
+      --data-dir /data/test-chain-2
+      --chain /data/genesis.json 
+      --grpc-address :10000 
+      --libp2p 0.0.0.0:10001 
+      --jsonrpc :10002 
+      --seal
+  polygon-rpcnode-1:
+    depends_on:
+      - polygon-bootnode-1
+      - polygon-bootnode-2
+    hostname: polygon-rpcnode-1
+    image: polygon
+    command:
+      server
+      --data-dir /data/test-chain-3
+      --chain /data/genesis.json 
+      --grpc-address :10000 
+      --libp2p :10001 
+      --jsonrpc :10002 
+      --seal
+  polygon-rpcnode-2:
+    depends_on:
+      - polygon-bootnode-1
+      - polygon-bootnode-2
+    hostname: polygon-rpcnode-2
+    image: polygon
+    ports:
+      - "8545:8545"
+    command:
+      server
+      --data-dir /data/test-chain-4
+      --chain /data/genesis.json 
+      --grpc-address :10000 
+      --libp2p :10001 
+      --jsonrpc 0.0.0.0:8545 
+      --seal
