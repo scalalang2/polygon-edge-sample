@@ -14,10 +14,10 @@ import (
 )
 
 var (
-	privateKey  = "2feea02f07cdc6d3e9528961615821e5b24e8f6c26fb866939c2743d74d9a8e2"
-	userAddress = "0xb507bae31ba521ad00a718d228045aba2d8832e6"
-	alice       = "0x5a9E4bE2A323b95883fDe23F8404891C4068321a"
-	chainId     = int64(100)
+	privateKey = "2feea02f07cdc6d3e9528961615821e5b24e8f6c26fb866939c2743d74d9a8e2"
+	bob        = "0xb507bae31ba521ad00a718d228045aba2d8832e6"
+	alice      = "0x5a9E4bE2A323b95883fDe23F8404891C4068321a"
+	chainId    = int64(100)
 )
 
 func main() {
@@ -37,8 +37,11 @@ func main() {
 	log.Info("deployed token contract to polygon edge", "contractAddr", contractAddress)
 
 	// transfer 100 token to alice
-	balance, err := token.BalanceOf(&bind.CallOpts{}, common.HexToAddress(userAddress))
-	log.Info("[before] balanceOf alice", "balance", balance)
+	log.Info("let's transfer 100 tokens to bob from alice")
+	aliceBalance, _ := token.BalanceOf(&bind.CallOpts{}, common.HexToAddress(alice))
+	bobBalance, _ := token.BalanceOf(&bind.CallOpts{}, common.HexToAddress(bob))
+	log.Info("[before] balanceOf alice", "balance", aliceBalance)
+	log.Info("[before] balanceOf bob", "balance", bobBalance)
 
 	tx, err = token.Transfer(opt, common.HexToAddress(alice), big.NewInt(100))
 	if err != nil {
@@ -47,9 +50,10 @@ func main() {
 	}
 
 	waitUntilTxCommitted(client, tx.Hash())
-	balance, err = token.BalanceOf(&bind.CallOpts{}, common.HexToAddress(alice))
-
-	log.Info("[after] balanceOf alice", "balance", balance)
+	aliceBalance, _ = token.BalanceOf(&bind.CallOpts{}, common.HexToAddress(alice))
+	bobBalance, _ = token.BalanceOf(&bind.CallOpts{}, common.HexToAddress(bob))
+	log.Info("[after] balanceOf alice", "balance", aliceBalance)
+	log.Info("[after] balanceOf bob", "balance", bobBalance)
 }
 
 func buildOpt(privateKey string, chainId int64) (*bind.TransactOpts, error) {
