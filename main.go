@@ -8,6 +8,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	log "github.com/inconshreveable/log15"
@@ -43,6 +44,7 @@ func main() {
 	log.Info("[before] balanceOf alice", "balance", aliceBalance)
 	log.Info("[before] balanceOf bob", "balance", bobBalance)
 
+	opt.GasLimit = 100000
 	tx, err = token.Transfer(opt, common.HexToAddress(alice), big.NewInt(100))
 	if err != nil {
 		log.Error("failed to execute 'transfer' method", "err", err)
@@ -54,6 +56,13 @@ func main() {
 	bobBalance, _ = token.BalanceOf(&bind.CallOpts{}, common.HexToAddress(bob))
 	log.Info("[after] balanceOf alice", "balance", aliceBalance)
 	log.Info("[after] balanceOf bob", "balance", bobBalance)
+
+	// keccak hash
+	result, err := token.Hash(&bind.CallOpts{}, "test", big.NewInt(1), common.HexToAddress(alice))
+	if err != nil {
+		log.Error("failed to call keccak function", "err", err)
+	}
+	log.Info("keccak hash", "result", hexutil.Encode(result[:]))
 }
 
 func buildOpt(privateKey string, chainId int64) (*bind.TransactOpts, error) {

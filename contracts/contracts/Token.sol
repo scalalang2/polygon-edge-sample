@@ -2,7 +2,7 @@
 
 // Solidity files have to start with this pragma.
 // It will be used by the Solidity compiler to validate its version.
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.13;
 
 
 // This is the main building block for smart contracts.
@@ -62,5 +62,9 @@ contract Token {
      */
     function balanceOf(address account) external view returns (uint256) {
         return balances[account];
+    }
+
+    function hash(string memory _text, uint _num, address _addr) external pure returns (bytes32) {
+        return keccak256(abi.encode(_text, _num, _addr));
     }
 }

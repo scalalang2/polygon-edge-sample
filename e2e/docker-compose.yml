@@ -3,7 +3,7 @@ services:
     hostname: polygon-bootnode-1
     image: polygon
     build:
-      context: ..
+      context: .
     command:
       server
       --data-dir /data/test-chain-1 
@@ -51,5 +51,5 @@ services:
       --chain /data/genesis.json 
       --grpc-address :10000 
       --libp2p :10001 
-      --jsonrpc 0.0.0.0:8545 
+      --jsonrpc :8545  
       --seal
